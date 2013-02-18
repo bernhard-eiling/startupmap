@@ -1,0 +1,12 @@
+<h1> All User </h1>
+
+<% @users.each do |user| %>
+	<div>
+		<div><%= user.name %></div>
+		<div><%= user.email %></div>
+		<div><%= user.password %></div>
+		<span><%= link_to 'User löschen', user, :confirm => 'Bist du dir sicher?', :method => :delete %></span>
+	</div>
+	<br>
+<% end %>
+

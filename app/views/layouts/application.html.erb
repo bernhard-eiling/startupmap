@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Startupmap</title>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="user_nav">
+    <%= link_to "Home", root_path %>
+  
+  <% if current_user %>
+    Logged in as <%= current_user.email %> | <%= current_user.name %> |
+    <%= link_to "Watch your Profile", user_path(current_user.id) %> |
+    <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>
+  <% else %>
+    <%= link_to "Sign up via Facepalm", user_omniauth_authorize_path(:facebook) %> |
+    <%= link_to "Sign up", new_user_registration_path %> |
+    <%= link_to "log in", new_user_session_path %>
+  <% end %>
+</div>
+
+<%= link_to "View all Users", users_path %>
+
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+
+
+<%= yield %>
+
+</body>
+</html>

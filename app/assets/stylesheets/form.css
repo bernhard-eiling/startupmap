@@ -1,0 +1,32 @@
+#form-body {
+	padding: 10px;
+	background-color: rgb(170, 204, 213);
+}
+
+#form-caption {
+	font-size: 22px;
+	font-weight: bold;
+	font-family: Kozuka, Arial;
+	margin-bottom: 30px;
+}
+#form-description {
+	font-family: Kozuka, Arial;
+	margin-bottom: 30px;
+}
+.input {
+	font-family: Kozuka, Arial;
+	margin: 30px;
+}
+.input-name {
+	width: 215px;
+	float: left;
+}
+.input-field {
+}
+#input-beschreibung {
+	width: 300px;
+	height: 100px;
+}
+#button-submit-form {
+	margin-left: 30px;
+}

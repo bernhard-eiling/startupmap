@@ -1,0 +1,54 @@
+<h1>Your Profile</h1>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<br>
+
+<h4>Your Player</h4>
+<% @user.players.each do |player| %>
+  <p>
+    <b>Name:</b>
+    <%= player.name %>
+  </p>
+ 
+  <p>
+    <b>Street:</b>
+    <%= player.street %>
+  </p>
+<% end %>
+<br>
+<h4>Create your Player</h4>
+
+<%= form_for([@user, @user.players.build]) do |f| %>
+    <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :street %><br />
+    <%= f.text_field :street %>
+  </div>
+  <div class="field">
+    <%= f.label :postalcode %><br />
+    <%= f.text_field :postalcode %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
