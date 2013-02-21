@@ -47,4 +47,14 @@ class PlayersController < ApplicationController
       format.xml  { render :xml => @player }
     end
   end
+
+  def destroy
+    @player = Player.find(params[:id])
+    @player.destroy
+ 
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
 end

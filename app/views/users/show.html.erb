@@ -18,17 +18,42 @@
     <b>Name:</b>
     <%= player.name %>
   </p>
- 
+
   <p>
-    <b>Street:</b>
+    <b>Straße:</b>
     <%= player.street %>
   </p>
+
+  <p>
+    <b>Postleitzahl:</b>
+    <%= player.postalcode %>
+  </p>
+
+  <p>
+    <b>Stadt:</b>
+    <%= player.city %>
+  </p>
+
+  <p>
+    <b>Beschreibung:</b>
+    <%= player.description %>
+  </p>
+
+  <p>
+    <b>Kind:</b>
+    <%= player.kind %>
+  </p>
+
+  <span><%= link_to 'Player löschen', user_player_path(@user, player), :confirm => 'Bist du dir sicher?', :method => :delete %></span>
+  <br>
+  -----------------------------
 <% end %>
 <br>
+
 <h4>Create your Player</h4>
 
 <%= form_for([@user, @user.players.build]) do |f| %>
-    <div class="field">
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
@@ -48,6 +73,12 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+
+  <%= f.radio_button :kind, "startup" %>
+  <%= label :kind_startup, "Start-Up" %>
+  <%= f.radio_button :kind, "investor" %>
+  <%= label :kind_investor, "Investor" %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
