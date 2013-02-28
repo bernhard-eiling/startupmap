@@ -22,23 +22,6 @@ class PlayersController < ApplicationController
     redirect_to user_path(@user)
   end
 
- #  	def create
- #  	@player = Player.new(params[:player])
- 
- #  	respond_to do |format|
- #    	if @player.save
- #      	format.html  { redirect_to(@player,
- #                    :notice => 'Dein neuer Player wurde erfolgreich erstellt.') }
- #      	format.json  { render :json => @player,
- #                    :status => :created, :location => @player }
- #    	else
- #      	format.html  { render :action => "new" }
- #      	format.json  { render :json => @player.errors,
- #                    :status => :unprocessable_entity }
- #    	end
- #  	end
-	# end
-
 	def show
     @player = Player.find(params[:id])
 
@@ -53,7 +36,7 @@ class PlayersController < ApplicationController
     @player.destroy
  
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to user_path(current_user) }
       format.json { head :no_content }
     end
   end

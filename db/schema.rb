@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221171907) do
+ActiveRecord::Schema.define(:version => 20130222102330) do
 
   create_table "players", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20130221171907) do
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.string   "kind"
+    t.float    "lat"
+    t.float    "lng"
   end
 
   add_index "players", ["user_id"], :name => "index_players_on_user_id"
