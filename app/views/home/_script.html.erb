@@ -2849,42 +2849,19 @@ function initialize() {
 
 //////////////////
 
-    // running geocoder
-    geocoder = new google.maps.Geocoder();
-    var image = 'res/marker.png'
-
-    var playerAddress = new Array()
-    var playerLocation = new Array()
-    playerAddress[0] = "Stephansplatz 1, Wien"       
-	playerAddress[1] = "Mariahilferstraße 103/12, Wien"
-	playerAddress[2] = "Kernstockgasse 16, Graz"
-
-
-    geocoder.geocode( { 'address': playerAddress[1]}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            //icon: image
-            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=1|FE6256|000000'
-        });
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
 
     // generating marker
     var markers = []
-    for (var i = 0; i < 100; i++) {
-        var latLng = new google.maps.LatLng(randomFloatBetween(47, 48, 5), randomFloatBetween(10, 16, 5))
+    <% @players.each do |player| %>
+        var latLng = new google.maps.LatLng(<%= player.lat %>, <%= player.lng %>)
         var marker = new google.maps.Marker({
             position: latLng,
             icon: markerImage,
-            title: 'Startup ' + i
+            title: '<%= player.name %>'
         })
         markers.push(marker)
-    }
+    <% end %>
+
     var markerCluster = new MarkerClusterer(map, markers, {
         //maxZoom: 15,
         gridSize: 80,
