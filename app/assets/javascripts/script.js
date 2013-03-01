@@ -1,6 +1,6 @@
 var map;
 
-function initialize() {
+$(document).ready(function() {
 
     $('.dropdown-toggle').dropdown()
 
@@ -128,35 +128,18 @@ function initialize() {
     polyAustria.setMap(map)
 
 /*
-    geocoder = new google.maps.Geocoder();
-    var address = "Millergasse 37, Wien"
-    var image = 'res/marker.png'
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            //icon: image
-            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=1|FE6256|000000'
-        });
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
+    $.getScript("<%= asset_path('markers.js') %>", function(data, textStatus, jqxhr) {
+        console.log(data); //data returned
+        console.log(textStatus); //success
+        console.log(jqxhr.status); //200
+        console.log('Load was performed.');
     });
-*/
+    */
 
     //////////////////////
     // MARKERCLUSTERER
     //////////////////////
-    
-    function randomFloatBetween(minValue,maxValue,precision){
-        if(typeof(precision) == 'undefined'){
-            precision = 2
-        }
-        return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision))
-    }
-    
+
     // styles of different zoom levels
     var styles = [[{
         url: 'assets/markerhell.png',
@@ -190,17 +173,54 @@ function initialize() {
         new google.maps.Size(31, 36)
     )
     
-    // generating random marker
     var markers = []
-    for (var i = 0; i < 100; i++) {
-        var latLng = new google.maps.LatLng(randomFloatBetween(47, 48, 5), randomFloatBetween(10, 16, 5))
+
+    $(".marker").each(function() {
+        //var infowindowSingle = new google.maps.InfoWindow()
+        var latLng = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"))
         var marker = new google.maps.Marker({
             position: latLng,
             icon: markerImage,
-            title: 'Startup ' + i
+            title: $(this).data("name")
         })
+
+        var boxText = document.createElement("div");
+
+        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+        boxText.innerHTML = $(this).data("name")
+                
+        var myOptions = {
+                 content: boxText
+                ,disableAutoPan: false
+                ,maxWidth: 0
+                ,pixelOffset: new google.maps.Size(-140, 0)
+                ,zIndex: null
+                ,boxStyle: { 
+                  background: "url('tipbox.gif') no-repeat"
+                  ,opacity: 0.75
+                  ,width: "280px"
+                 }
+                ,closeBoxMargin: "10px 2px 2px 2px"
+                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+                ,infoBoxClearance: new google.maps.Size(1, 1)
+                ,isHidden: false
+                ,pane: "floatPane"
+                ,enableEventPropagation: false
+        };
+        var ib = new InfoBox(myOptions);
+
+        makeInfoBoxEvent(map, ib, marker)
+
         markers.push(marker)
+
+    })
+
+    function makeInfoBoxEvent(map, ib, marker) {
+        google.maps.event.addListener(marker, 'click', function() {
+            ib.open(map, marker)
+        })
     }
+    
     var markerCluster = new MarkerClusterer(map, markers, {
         //maxZoom: 15,
         gridSize: 80,
@@ -208,23 +228,25 @@ function initialize() {
         zoomOnClick: false
     })
 
-    google.maps.event.addListener(markerCluster, "click", function (c) {
-        //console.log(c.getMarkers())
-
-        $.fancybox({
-            //href: "res/form.html",
-            //href : $(this).attr('href'),
-            type : 'iframe',
-            helpers : {
-                overlay : null
-            }
-            //height: "200"
-            //width: "200"
-        })
-        //$(".fancybox-wrap").css({'top':'20px', 'bottom':'auto'})
+    var infowindowMulti = new google.maps.InfoWindow()
+    
+    google.maps.event.addListener(markerCluster, 'clusterclick', function(mCluster) {
+        makeInfoWindowEvent(map, infowindowMulti, "testinfo", mCluster.getMarkers(1))
+        console.log(mCluster.getMarkers())
+        
+        infowindowMulti.setContent("your info")
+        myLatlng = new google.maps.LatLng(mCluster.getCenter().ya, mCluster.getCenter().za)
+        infowindowMulti.setPosition(myLatlng)
+        infowindowMulti.open(map)
+        
     })
+    
+
+///////////////////////    
 
 
+
+    
     // ROUTINE
 
     $("#alle").click(function() {
@@ -377,10 +399,6 @@ function initialize() {
         polyWienNeg.setMap(null)
         map.setZoom(12)
     })
-}
 
-google.maps.event.addDomListener(window, 'load', initialize);
-
-$(document).ready(function() {
 
 })

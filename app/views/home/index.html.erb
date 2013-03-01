@@ -1,6 +1,11 @@
-<%= render "home/script" %>
+<div id="map_canvas"></div>
 
-	<div id="map_canvas"></div>
+<div id="marker-container">
+	<% @players.each do |player| %>
+	<div class="marker" data-name="<%= player.name %>" data-description="<%= player.description %>" data-lat="<%= player.lat %>" data-lng="<%= player.lng %>">
+	</div>
+	<% end %>
+</div>
 	<!--
 	<div id="header">
 		<img id="logo" src="assets/logo-eSPARK-rgb.jpg"></img>
