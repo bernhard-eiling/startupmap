@@ -14,8 +14,8 @@ $(document).ready(function() {
         
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            lat = results[0].geometry.location.hb
-            lng = results[0].geometry.location.ib
+            lat = results[0].geometry.location.ib
+            lng = results[0].geometry.location.jb
             $("#player_lat:hidden").val(lat)
             $("#player_lng:hidden").val(lng)
 
@@ -27,5 +27,4 @@ $(document).ready(function() {
           }
         })
     })
-    
 })

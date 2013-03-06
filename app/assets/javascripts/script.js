@@ -24,5 +24,4 @@ $(document).ready(function() {
 
     initPolygons(map)
     initMarker(map)
-
 })

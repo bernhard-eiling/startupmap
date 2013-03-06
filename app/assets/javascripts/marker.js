@@ -149,17 +149,34 @@ function initMarker(map) {
       icon: markerImage
     })
     for (var i = 0; i < ev.getSize(); i++) {
-      console.log(ev.getMarkers()[i].position.ib)
-      boxHTML += "<a href='#' class='cluster-marker' data-lat=" + ev.getMarkers()[i].position.hb + " data-lng=" + ev.getMarkers()[i].position.ib + ">" + ev.getMarkers()[i].name + "</a><br>"
+      console.log(ev.getMarkers()[i])
+      boxHTML += "<a href='#' class='cluster-marker' data-id=" + i + " + data-lat=" + ev.getMarkers()[i].position.ib + " data-lng=" + ev.getMarkers()[i].position.jb + ">" + ev.getMarkers()[i].name + "</a><br>"
 
     }
     boxTextCluster.innerHTML = boxHTML
     infoBoxCluster.open(map, markerCluster)
+
+    var markersInfoBox = ev.getMarkers()
+    
     google.maps.event.addListener(infoBoxCluster, 'domready', function(ev) {
       //console.log(infoBoxCluster)
       $(".cluster-marker").click(function() {
         var clusterItemPos = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"))
         infoBoxCluster.close(map, markerCluster)
+        //console.log(parseInt($(this).data("id")))
+
+        var boxText2 = document.createElement("div");
+
+        boxText2.style.cssText = boxStyle
+
+        var boxOptions2 = setBoxOptions(boxText2)
+
+        boxText2.innerHTML = markersInfoBox[parseInt($(this).data("id"))].name + "<br><br>" + markersInfoBox[parseInt($(this).data("id"))].description
+
+        ib2 = new InfoBox(boxOptions2)
+
+        //makeInfoBoxEvent(map, ib2, markersInfoBox[parseInt($(this).data("id"))])
+        ib2.open(map, markersInfoBox[parseInt($(this).data("id"))])
         map.panTo(clusterItemPos)
         map.setZoom(17)
       })
