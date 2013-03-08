@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
     var markers = []
+    var cityVal = "Wien"
+    var kindVal = "startup"
 
     var mapOptions = {
         zoom: 7,
@@ -35,26 +37,35 @@ $(document).ready(function() {
     fillMarkerArray()
     addMarkerToCluster()
 
-    // Fill DOM with marker
-    $('#city-name').change(function() {
-        var cityVal = $(this).val()
-        var url = '/getCity/' + cityVal
-
-        $.ajax({
-            url: url,
-            dataType: "text"
-
-        }).done(function(data) {
-            $("#marker-container").html(data)
-            fillMarkerArray()
-            addMarkerToCluster()
-        }).fail(function() {
-            console.log("error")
-        }).always(function() {
-            console.log("complete")
-        })
-
+    // FOR COMBINED KEY VALUE PAIRS "GRAZ AND WIEN" MAYBE PARAMS HASH?
+    // Fill DOM with Marker kind
+    $('.replace-city').click(function() {
+        $('.replace-city').css("background-color", "white")
+        $(this).css("background-color", "blue")
+        cityVal = $(this).attr("value")
+        replaceMarker()
     })
+    $('.replace-kind').click(function() {
+        $('.replace-kind').css("background-color", "white")
+        $(this).css("background-color", "blue")
+        kindVal = $(this).attr("value")
+        replaceMarker()
+    })
+
+        function replaceMarker() {
+            var url = '/getKind/kind=' + kindVal + "/city=" + cityVal
+            console.log(kindVal + ", " + cityVal)
+
+            $.ajax({
+                url: url,
+                dataType: "text"
+
+            }).done(function(data) {
+                $("#marker-container").html(data)
+                fillMarkerArray()
+                addMarkerToCluster()
+            })
+        }
 
         function fillMarkerArray() {;
 
@@ -78,7 +89,7 @@ $(document).ready(function() {
         }
 
         function addInfoBox() {
-            
+
         }
 
         function addMarkerToCluster() {
@@ -112,9 +123,10 @@ $(document).ready(function() {
 
             markerCluster.setStyles(styles[0])
             markerCluster.setZoomOnClick(false)
-            markerCluster.clearMarkers()
 
+            markerCluster.clearMarkers()
             markerCluster.addMarkers(markers)
+
         }
 
         function initMarker() {

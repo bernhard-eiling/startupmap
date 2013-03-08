@@ -22,14 +22,32 @@
     <%= link_to "log in", new_user_session_path %>
   <% end %>
 </div>
-<div id="search-city" style="float: right">
-  <select id="city-name" name="city-name[id]">
-    <option value="">Select a City</option> 
-    <option value="Wien">Wien</option> 
-    <option value="Graz">Graz</option> 
-    <option value="Salzburg">Salzburg</option>
-  </select>
+
+<div id="left-wrapper">
+  <div id="logo"></div>
+  <div id="kind">
+    <div id="startup" class="clickable replace-kind" value="startup">Startup
+      <div class="counter"></div>
+    </div>
+    <div id="investor" class="clickable replace-kind" value="investor">Investor
+      <div class="counter"></div>
+    </div>
+  </div>
+  <div class="divider">-------------------</div>
+  <div id="city">
+    <div id="graz" class="clickable replace-city" value="Graz">Graz
+      <div class="counter"></div>
+    </div>
+    <div id="salzburg" class="clickable replace-city" value="Salzburg">Salzburg
+      <div class="counter"></div>
+    </div>
+    <div id="wien" class="clickable replace-city" name="wien" value="Wien">Wien
+      <div class="counter"></div>
+    </div>
+    </div>
+  </div>
 </div>
+
 
 <%= link_to "View all Users", users_path %>
 
