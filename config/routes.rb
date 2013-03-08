@@ -2,7 +2,9 @@ Startupmap::Application.routes.draw do
 
 	root :to => 'home#index'
 
+
 	#match '/users_index/' => 'home#show_users'
+	match 'getCity/:city', :to => 'home#getCity'
 
   
 

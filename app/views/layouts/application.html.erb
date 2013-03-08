@@ -22,6 +22,14 @@
     <%= link_to "log in", new_user_session_path %>
   <% end %>
 </div>
+<div id="search-city" style="float: right">
+  <select id="city-name" name="city-name[id]">
+    <option value="">Select a City</option> 
+    <option value="Wien">Wien</option> 
+    <option value="Graz">Graz</option> 
+    <option value="Salzburg">Salzburg</option>
+  </select>
+</div>
 
 <%= link_to "View all Users", users_path %>
 

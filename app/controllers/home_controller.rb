@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       format.xml  { render :xml => @players }
     end
   end
+
+  def getCity
+  	@players = Player.where("city = ?", params[:city])
+  end
 end
