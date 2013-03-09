@@ -1,5 +1,5 @@
 <% @players.each do |player| %>
-	<div class="">
+	<div class="clickable marker-list" data-name="<%= player.name %>" data-description="<%= player.description %>" data-lat="<%= player.lat %>" data-lng="<%= player.lng %>">
 		<%= player.name %>
 	</div>
 <% end %>
