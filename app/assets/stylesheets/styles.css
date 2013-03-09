@@ -13,6 +13,15 @@ html, body, #map_canvas {
 	padding: 5px;
 }
 
+#right-wrapper {
+	z-index: 100;
+	position: absolute;
+	top: 150px;
+	right: 10%;
+	background-color: white;
+	padding: 5px;
+}
+
 // MARKER
 #marker-container {
 	position: absolute;

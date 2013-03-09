@@ -37,6 +37,21 @@ $(document).ready(function() {
     fillMarkerArray()
     addMarkerToCluster()
 
+    // Search for players by name
+    $("#search-field").bind("keyup", function() {
+        var name = $(this).val()
+        var url = '/searchPlayer/name=' + name
+        console.log(name)
+
+        $.ajax({
+            url: url,
+            dataType: "text"
+
+        }).done(function(data) {
+            $("#search-result").html(data)
+        })
+    })
+
     // FOR COMBINED KEY VALUE PAIRS "GRAZ AND WIEN" MAYBE PARAMS HASH?
     // Fill DOM with Marker kind
     $('.replace-city').click(function() {
@@ -53,7 +68,7 @@ $(document).ready(function() {
     })
 
         function replaceMarker() {
-            var url = '/getKind/kind=' + kindVal + "/city=" + cityVal
+            var url = '/placeMarker/kind=' + kindVal + "/city=" + cityVal
             console.log(kindVal + ", " + cityVal)
 
             $.ajax({

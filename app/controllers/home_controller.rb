@@ -6,15 +6,13 @@ class HomeController < ApplicationController
       format.xml  { render :xml => @players }
     end
   end
-
-  def getCity
-  	@players = Player.where("city = ?", params[:city])
-  end
-  #   def getKind
-  #   @players = Player.where("kind = ?", params[:kind])
-  # end
   
-  def getKind
+  def placeMarker
     @players = Player.where("kind = ? AND city = ?", params[:kind], params[:city])
+  end
+  def searchPlayer   
+    q = "%#{params[:name]}%"
+    # User.where("name like ? or description like ?", q, q)
+    @players = Player.where("name like ?", q)
   end
 end
