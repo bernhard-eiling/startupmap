@@ -111,6 +111,13 @@ $(document).ready(function() {
                 //console.log(findMarkerIndexByName($(this).data("name")))
                 var latLng = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"))
 
+                var data = '<div class="marker" data-name="' + $(this).data("name") + '" data-description="' + $(this).data("description") + '" data-lat="' + $(this).data("lat") + '" data-lng="' + $(this).data("lng") + '"></div>'
+
+                // ERROE: produces multiple idetical marker
+                $("#marker-container").append(data)
+                fillMarkerArray()
+                addMarkerToCluster()
+
                 var searchMarker = new google.maps.Marker({
                     position: latLng
                 })
@@ -219,6 +226,7 @@ $(document).ready(function() {
                 boxText.innerHTML = marker.name + "<br><br>" + marker.description
                 infoBox.setOptions(setBoxOptions(boxText))
                 infoBox.open(map, marker)
+                map.setZoom(17)
             })
             markers.push(marker)
         })

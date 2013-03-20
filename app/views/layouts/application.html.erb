@@ -23,36 +23,6 @@
   <% end %>
 </div>
 
-<div id="left-wrapper">
-  <div id="logo"></div>
-  <div id="kind">
-    <div id="startup" class="clickable replace-kind" value="startup">Startup
-      <div class="counter"><%= @numStartups.length %></div>
-    </div>
-    <div id="investor" class="clickable replace-kind" value="investor">Investor
-      <div class="counter"><%= @numInvestors.length %></div>
-    </div>
-  </div>
-  <div class="divider">-------------------</div>
-  <div id="city">
-    <div id="graz" class="clickable replace-city" value="Graz">Graz
-      <div class="counter"><%= @numGraz.length %></div>
-    </div>
-    <div id="salzburg" class="clickable replace-city" value="Salzburg">Salzburg
-      <div class="counter"><%= @numSalzburg.length %></div>
-    </div>
-    <div id="wien" class="clickable replace-city" name="wien" value="Wien">Wien
-      <div class="counter"><%= @numWien.length %></div>
-    </div>
-  </div>
-</div>
-
-<div id="right-wrapper">
-  <div id="search">
-    <input id="search-field" type="text" name="fname">
-  </div>
-  <div id="search-result"></div>
-</div>
 
 
 <%= link_to "View all Users", users_path %>

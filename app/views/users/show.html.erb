@@ -1,10 +1,6 @@
 <h1>Your Profile</h1>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <p>
   <b>Name:</b>
   <%= @user.name %>
@@ -20,7 +16,20 @@
   </p>
 
 <br>
+<b>Set your preferences:</b>
+<%= form_for(current_user) do |f| %>
 
+<div class="field">
+  <%= f.radio_button :preferences, "startup" %>
+  <%= label :preferences_startup, "Start-Up" %>
+  <%= f.radio_button :preferences, "investor" %>
+  <%= label :preferences_investor, "Investor" %>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<br>
 <h4>Your Player</h4>
 <% @user.players.each do |player| %>
   <p>
