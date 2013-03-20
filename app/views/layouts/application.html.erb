@@ -27,23 +27,22 @@
   <div id="logo"></div>
   <div id="kind">
     <div id="startup" class="clickable replace-kind" value="startup">Startup
-      <div class="counter"></div>
+      <div class="counter"><%= @numStartups.length %></div>
     </div>
     <div id="investor" class="clickable replace-kind" value="investor">Investor
-      <div class="counter"></div>
+      <div class="counter"><%= @numInvestors.length %></div>
     </div>
   </div>
   <div class="divider">-------------------</div>
   <div id="city">
     <div id="graz" class="clickable replace-city" value="Graz">Graz
-      <div class="counter"></div>
+      <div class="counter"><%= @numGraz.length %></div>
     </div>
     <div id="salzburg" class="clickable replace-city" value="Salzburg">Salzburg
-      <div class="counter"></div>
+      <div class="counter"><%= @numSalzburg.length %></div>
     </div>
     <div id="wien" class="clickable replace-city" name="wien" value="Wien">Wien
-      <div class="counter"></div>
-    </div>
+      <div class="counter"><%= @numWien.length %></div>
     </div>
   </div>
 </div>

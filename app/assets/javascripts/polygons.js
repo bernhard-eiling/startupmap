@@ -106,7 +106,7 @@ function initPolygons(map) {
 
         
 // SETTING POLYGONS
-
+/*
     $("#alle").click(function() {
         map.panTo(centerAustria)
         polyAustria.setMap(map)
@@ -257,4 +257,5 @@ function initPolygons(map) {
         polyWienNeg.setMap(null)
         map.setZoom(12)
     })
+    */
 }

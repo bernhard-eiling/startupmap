@@ -1,5 +1,10 @@
 <h1>Your Profile</h1>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>
   <b>Name:</b>
   <%= @user.name %>
@@ -9,6 +14,10 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
+<p>
+    <b>Preferences:</b>
+    <%= @user.preferences %>
+  </p>
 
 <br>
 
@@ -49,8 +58,11 @@
     <br>
     <%= player.lng %>
 
+
   <span><%= link_to 'Player löschen', user_player_path(@user, player), :confirm => 'Bist du dir sicher?', :method => :delete %></span>
   <br>
+<br>
+
   -----------------------------
 <% end %>
 <br>

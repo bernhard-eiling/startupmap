@@ -14,13 +14,12 @@ $(document).ready(function() {
         
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            lat = results[0].geometry.location.ib
-            lng = results[0].geometry.location.jb
+            lat = results[0].geometry.location.lat()
+            lng = results[0].geometry.location.lng()
             $("#player_lat:hidden").val(lat)
             $("#player_lng:hidden").val(lng)
 
             $("#new_player").unbind('submit').submit()
-
           } else {
             alert("Dein Player konnte nicht eingetragen werden, bitte probiere es noch einmal.")
             return false

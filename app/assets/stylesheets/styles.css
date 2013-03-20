@@ -32,3 +32,6 @@ html, body, #map_canvas {
 .clickable {
 	cursor: pointer;
 }
+.counter {
+	float: right;
+}

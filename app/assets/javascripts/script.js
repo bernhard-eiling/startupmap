@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
     var markers = []
-    var cityVal = "Wien"
-    var kindVal = "startup"
+    var cityVals = []
+    var kindVals = []
 
     var mapOptions = {
         zoom: 7,
@@ -90,6 +90,7 @@ $(document).ready(function() {
 
     initPolygons(map)
     fillMarkerArray()
+    replaceMarker()
     addMarkerToCluster()
 
     ////////////////////
@@ -98,7 +99,7 @@ $(document).ready(function() {
     $("#search-field").bind("keyup", function() {
         var name = $(this).val()
         var url = '/searchPlayer/name=' + name
-        console.log(name)
+        //console.log(name)
 
         $.ajax({
             url: url,
@@ -110,10 +111,15 @@ $(document).ready(function() {
                 //console.log(findMarkerIndexByName($(this).data("name")))
                 var latLng = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"))
 
+                var searchMarker = new google.maps.Marker({
+                    position: latLng
+                })
+
                 boxText.innerHTML = $(this).data("name") + "<br><br>" + $(this).data("description")
                 infoBox.setOptions(setBoxOptions(boxText))
 
-                infoBox.open(map, markers[findMarkerIndexByName($(this).data("name"))])
+                infoBox.open(map, searchMarker)
+                //console.log(markers[findMarkerIndexByName($(this).data("name"))])
                 map.panTo(latLng)
                 map.setZoom(17)
             })
@@ -121,22 +127,37 @@ $(document).ready(function() {
     })
 
     ///////////////////////////
-    // FOR COMBINED KEY VALUE PAIRS "GRAZ AND WIEN" MAYBE PARAMS HASH?
-    // Fill DOM with Marker kind
+    // Filter Marker
     ///////////////////////////
+
     $('.replace-city').click(function() {
-        infoBox.close()
-        $('.replace-city').css("background-color", "white")
-        $(this).css("background-color", "blue")
-        cityVal = $(this).attr("value")
-        replaceMarker()
+        if (cityVals.indexOf($(this).attr('value')) != -1) {
+            $(this).css("background-color", "white")
+            //console.log("val" + $(this).attr('value'))
+            var index = cityVals.indexOf($(this).attr('value'))
+            cityVals.splice(index, 1)
+            replaceMarker()
+        } else {
+            infoBox.close()
+            $(this).css("background-color", "blue")
+            cityVals.push($(this).attr("value"))
+            replaceMarker()
+        }
     })
     $('.replace-kind').click(function() {
-        infoBox.close()
-        $('.replace-kind').css("background-color", "white")
-        $(this).css("background-color", "blue")
-        kindVal = $(this).attr("value")
-        replaceMarker()
+        if (kindVals.indexOf($(this).attr('value')) != -1) {
+            $(this).css("background-color", "white")
+            //console.log("val" + $(this).attr('value'))
+            var index = kindVals.indexOf($(this).attr('value'))
+            kindVals.splice(index, 1)
+            replaceMarker()
+
+        } else {
+            infoBox.close()
+            $(this).css("background-color", "blue")
+            kindVals.push($(this).attr("value"))
+            replaceMarker()
+        }
     })
 
     function findMarkerIndexByName(name) {
@@ -151,13 +172,25 @@ $(document).ready(function() {
     }
 
     function replaceMarker() {
-        var url = '/placeMarker/kind=' + kindVal + "/city=" + cityVal
-        console.log(kindVal + ", " + cityVal)
+        var cityUrl = ""
+        var kindUrl = ""
+
+        for (var i = 0; i < cityVals.length; i++) {
+            cityUrl += 'city[]=' + cityVals[i] + '&'
+            //console.log(cityVals[i])
+        }
+
+        for (var i = 0; i < kindVals.length; i++) {
+            kindUrl += 'kind[]=' + kindVals[i] + '&'
+        }
+
+        var url = '/placeMarker?' + cityUrl + kindUrl
+        url = url.slice(0, -1);
+        //console.log(url)
 
         $.ajax({
             url: url,
             dataType: "text"
-
         }).done(function(data) {
             $("#marker-container").html(data)
             fillMarkerArray()
@@ -232,7 +265,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < ev.getSize(); i++) {
                 //console.log(ev.getMarkers()[i])
-                boxHTML += "<a href='#' class='cluster-marker' data-id=" + i + " + data-lat=" + ev.getMarkers()[i].position.ib + " data-lng=" + ev.getMarkers()[i].position.jb + ">" + ev.getMarkers()[i].name + "</a><br>"
+                boxHTML += "<a href='#' class='cluster-marker' data-id=" + i + " + data-lat=" + ev.getMarkers()[i].position.lat() + " data-lng=" + ev.getMarkers()[i].position.lng() + ">" + ev.getMarkers()[i].name + "</a><br>"
 
             }
             // console.log(boxHTML)
@@ -241,11 +274,13 @@ $(document).ready(function() {
             infoBox.setOptions(setBoxOptions(boxText))
             infoBox.open(map, ev.getMarkers()[0])
 
+            // RECURSION ?????
             var markersInCluster = ev.getMarkers()
 
             google.maps.event.addListener(infoBox, 'domready', function(ev) {
 
-                $(".cluster-marker").click(function() {
+                $(".cluster-marker").unbind("click").bind("click", function() {
+
                     var clusterItemPos = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"))
 
                     boxText.innerHTML = markersInCluster[parseInt($(this).data("id"))].name + "<br><br>" + markersInCluster[parseInt($(this).data("id"))].description

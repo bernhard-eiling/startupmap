@@ -24,4 +24,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def setPreferences
+    current_user.preferences = {:city => ["Wien", "Graz"], :kind => ["startup"]}
+    current_user.save
+  end
 end
