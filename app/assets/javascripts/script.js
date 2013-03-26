@@ -146,7 +146,7 @@ $(document).ready(function() {
             replaceMarker()
         } else {
             infoBox.close()
-            $(this).css("background-color", "blue")
+            $(this).css("background-color", "rgb(200, 200, 200)")
             cityVals.push($(this).attr("value"))
             replaceMarker()
         }
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
         } else {
             infoBox.close()
-            $(this).css("background-color", "blue")
+            $(this).css("background-color", "rgb(200, 200, 200)")
             kindVals.push($(this).attr("value"))
             replaceMarker()
         }

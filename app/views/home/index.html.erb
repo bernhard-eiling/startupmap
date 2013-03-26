@@ -1,25 +1,53 @@
 <div id="left-wrapper">
-  <div id="logo"></div>
-  <div id="kind">
-    <div id="startup" class="clickable replace-kind" value="startup">Startup
-      <div class="counter"><%= @numStartups.length %></div>
-    </div>
-    <div id="investor" class="clickable replace-kind" value="investor">Investor
-      <div class="counter"><%= @numInvestors.length %></div>
-    </div>
-  </div>
-  <div class="divider">-------------------</div>
-  <div id="city">
-    <div id="graz" class="clickable replace-city" value="Graz">Graz
-      <div class="counter"><%= @numGraz.length %></div>
-    </div>
-    <div id="salzburg" class="clickable replace-city" value="Salzburg">Salzburg
-      <div class="counter"><%= @numSalzburg.length %></div>
-    </div>
-    <div id="wien" class="clickable replace-city" name="wien" value="Wien">Wien
-      <div class="counter"><%= @numWien.length %></div>
-    </div>
-  </div>
+	<div id="left-wrapper-top">
+		<div id="logo"></div>
+		<div id="logo-headline">Personalize your map</div>
+	</div>
+	<div id="left-left">
+		<div id="clicker-startups" class="clicker clickable"></div>
+		<div id="clicker-investors" class="clicker clickable"></div>
+		<div id="clicker-ventures" class="clicker clickable"></div>
+		<div id="clicker-riskcapital" class="clicker clickable"></div>
+	</div>
+	<div id="left-middle">
+	  <div id="kind">
+	    <div id="startup" class="left-item clickable replace-kind" value="startup">&nbsp
+	    	Ventures
+	    </div>
+	    <div id="investor" class="left-item clickable replace-kind" value="investor">&nbsp
+	    	Coworking/Incubator
+	    </div>
+	    	    <div id="venture" class="left-item clickable replace-kind" value="investor">&nbsp
+	    	    	Ventures
+	    </div>
+	    	    <div id="riskcapital" class="left-item clickable replace-kind" value="investor">&nbsp
+	    	    	Risk Capital
+	    </div>
+	  </div>
+	  <div id="city">
+	    <div id="graz" class="left-item clickable replace-city" value="Graz">&nbsp
+	    	Graz
+	    </div>
+	    <div id="salzburg" class="left-item clickable replace-city" value="Salzburg">&nbsp
+	    	Salzburg
+	    </div>
+	    <div id="wien" class="left-item clickable replace-city" name="wien" value="Wien">&nbsp
+	    	Wien
+	    </div>
+	  </div>
+	</div>
+	<div id="left-right">
+		<div id="counter-startups" class="counter">&nbsp
+			<%= @numStartups.length %></div>
+		<div id="counter-investors" class="counter">&nbsp
+			<%= @numInvestors.length %></div>
+		<div id="counter-ventures" class="counter">&nbsp13</div>
+		<div id="counter-riskcapital" class="counter">&nbsp
+			23</div>
+	</div>
+	<div id="left-bottom">&nbsp
+		Total Results: 250
+	</div>
 </div>
 
 <div id="right-wrapper">
@@ -27,6 +55,10 @@
     <input id="search-field" type="text" name="fname">
   </div>
   <div id="search-result"></div>
+</div>
+
+<div id="footer">
+	<h4 id="footer-headline">powered by:</h4>
 </div>
 
 <div id="map_canvas"></div>

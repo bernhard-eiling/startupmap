@@ -1,25 +1,158 @@
+@font-face
+{
+font-family: Sansation;
+src: url('app/assets/fonts/Sansation_Regular.ttf');
+}
 html, body, #map_canvas {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-
-#left-wrapper{
-	z-index: 100;
-	position: absolute;
-	top: 150px;
-	left: 10%;
-	background-color: white;
-	padding: 5px;
+a {
+	color: white;
 }
+
 
 #right-wrapper {
 	z-index: 100;
 	position: absolute;
-	top: 150px;
-	right: 10%;
+	top: 60px;
+	right: 5%;
 	background-color: white;
 	padding: 5px;
+}
+
+#top-bar{
+	height: 40px;
+	width: 100%;
+	background-color: rgb(50,50,50);
+}
+#top-bar-green {
+	background-color: rgb(102,246,69);
+	width: 25%;
+	height: 6px;
+	float: left;
+}
+#top-bar-yellow {
+	background-color: rgb(255,218,45);
+	width: 25%;
+	height: 6px;
+	float: left;
+}
+#top-bar-blue {
+	background-color: rgb(64,154,211);
+	width: 25%;
+	height: 6px;
+	float: left;
+}
+#top-bar-orange {
+	background-color: rgb(255,120,0);
+	width: 25%;
+	height: 6px;
+	float: left;
+}
+.float-right {
+	color: white;
+	float: right;
+}
+.nav-item {
+	padding: 5px;
+}
+
+
+#left-wrapper {
+	z-index: 100;
+	position: absolute;
+	top: 0px;
+	left: 5%;
+	width: 200px;
+	height: 100%;
+}
+#left-wrapper-top {
+	background-color: white;
+}
+#logo {
+	width: 100%;
+	height: 70px;
+}
+#logo-headline {
+	text-align: center;
+	height: 30px;
+	width: 100%;
+	color: white;
+	background-color: rgb(50,50,50);
+}
+#left-middle {
+	float: left;
+	width: 70%;
+	background-color: white;
+}
+#left-left {
+	float: left;
+	width: 15%;
+}
+#left-right {
+	float: left;
+	width: 15%;
+}
+.left-item {
+	height: 26px;
+}
+
+.clicker {
+	width: 100%;
+	height: 26px;
+}
+#clicker-startups {
+	background-color: rgb(102,246,69);
+}
+#clicker-investors {
+	background-color: rgb(255,218,45);
+}
+#clicker-ventures {
+	background-color: rgb(64,154,211);
+}
+#clicker-riskcapital {
+	background-color: rgb(255,120,0);
+}
+.counter {
+	width: 100%;
+	height: 26px;
+	color: white;
+}
+#counter-startups {
+	background-color: rgb(102,246,69);
+}
+#counter-investors {
+	background-color: rgb(255,218,45);
+}
+#counter-ventures {
+	background-color: rgb(64,154,211);
+}
+#counter-riskcapital {
+	background-color: rgb(255,120,0);
+}
+#counter-graz {
+	background-color: 
+}
+#left-bottom {
+	background-color: rgb(200, 200, 200);
+	width: 70%;
+	height: 30px;
+	margin-left: 30px;
+	margin-top: 182px;
+}
+
+#footer {
+	z-index: 100;
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	background-color: white;
+	bottom: 0px;
+}
+#footer-headline {
+	padding-left: 10px;
 }
 
 // MARKER

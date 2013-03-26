@@ -10,28 +10,28 @@
 </head>
 <body>
 <div id="user_nav">
-    <%= link_to "Home", root_path %>
+  <div id="top-bar">
+    <div id="top-bar-green">
+    </div>
+    <div id="top-bar-yellow">
+    </div>
+    <div id="top-bar-blue">
+    </div>
+    <div id="top-bar-orange">
+    </div>
   
   <% if current_user %>
-    Logged in as <%= current_user.email %> | <%= current_user.name %> |
-    <%= link_to "Watch your Profile", user_path(current_user.id) %> |
-    <%= link_to "Log out", destroy_user_session_path, :method => :delete  %>
+    <div id="login" class="float-right nav-item"><%= current_user.email %> | <%= current_user.name %></div>
+    <div id="watch-profile" class="float-right nav-item"><%= link_to "Watch your Profile", user_path(current_user.id) %></div>
+    <div class="float-right nav-item"><%= link_to "Log out", destroy_user_session_path, :method => :delete  %></div>
   <% else %>
-    <%= link_to "Sign up via Facepalm", user_omniauth_authorize_path(:facebook) %> |
-    <%= link_to "Sign up", new_user_registration_path %> |
-    <%= link_to "log in", new_user_session_path %>
+    <div class="float-right nav-item"><%= link_to "Sign up via Facebook", user_omniauth_authorize_path(:facebook) %> |
+    <%= link_to "Sign up", new_user_registration_path %> </div>
+    <div id="login" class="float-right nav-item"><%= link_to "log in", new_user_session_path %></div>
   <% end %>
+  </div>
+
 </div>
-
-
-
-<%= link_to "View all Users", users_path %>
-
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-
 
 <%= yield %>
 
